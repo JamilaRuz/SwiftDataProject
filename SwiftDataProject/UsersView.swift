@@ -6,13 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UsersView: View {
+    @Query var users: [User]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(users) { user in
+            NavigationLink(value: user) {
+                Text(user.name)
+                Text(user.city)
+            }
+        }
     }
 }
 
 #Preview {
     UsersView()
+        .modelContainer(for: User.self)
 }
